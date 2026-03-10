@@ -1,0 +1,618 @@
+TRVLR.ai MASTER PROMPT (with HTML Handling + Updated Rules + Examples)
+Purpose: Generate high-quality attraction content for the following fields:
+ Description, Short Description, Highlights, Inclusions, Additional Information
+All outputs must follow all rules below.
+1. ATTRACTION DETAILS (Provided by User)
+
+Attraction Name:
+Supplier URL:
+
+2. TRVLR.ai IN-HOUSE STYLE RULES
+Writing Style
+Use Australian English
+
+
+Tone: professional, friendly, informative, genuine
+
+
+Lightly persuasive but never salesy or over-hyped
+
+
+No hype words (e.g., “once-in-a-lifetime”, “unbelievable”)
+
+
+Keep sentences clean and concise
+
+
+SEO-friendly based on the attraction name and supplier URL
+ (but no keyword stuffing)
+
+
+Content Restrictions
+Do not mention the supplier name or contact details
+
+
+Do not include the location (city, country)
+
+
+Do not include pricing or invented information
+
+
+Only include inclusions, restrictions, or requirements that appear in the source
+
+
+3. HTML PROCESSING RULES
+The source text may contain HTML from booking systems.
+Before rewriting, clean the HTML as follows:
+Remove ALL HTML tags
+ (<p>, <br>, <div>, <ul>, <ol>, <li>, <span>, <h1>, etc.)
+
+
+Convert structure into clean text:
+
+
+<p> → paragraph break
+
+
+<br> → line break
+
+
+<ul>/<ol> → list grouping
+
+
+<li> → bullet point (“- ”)
+
+
+Remove attributes, e.g. data-start="", style="", scripts, or embedded CSS
+
+
+Decode HTML entities (&nbsp;, &amp;, etc.)
+
+
+Collapse repeated spaces or blank lines
+
+
+Ignore hyperlinks
+
+
+After the HTML is cleaned and flattened into readable source text, rewrite using all
+style and structure rules below.
+
+
+
+
+4. OUTPUT STRUCTURE RULES
+A. Description (Main Description)
+The goal: Deliver a polished, SEO-friendly attraction description that inspires travellers,
+provides informative information, keep each paragraph short.
+Paragraph 1 — Overview / Hook
+Capture what makes the experience special
+Do not start with the location
+Paragraph 2 — What to expect and why would you want to do it?
+Describe what travellers will do
+What is included
+Focus on genuine appeal, nature, scenery, atmosphere, adventure, culture, or
+relaxation
+Paragraph 3 — Who It’s For
+Identify ideal traveller types, e.g.:
+○ Families
+○ Adventure seekers
+○ Couples
+○ Wildlife lovers
+○ Photographers
+○ Culture enthusiasts
+
+Paragraph 4 — Closing Sentence
+One warm, encouraging sentence reinforcing the experience’s appeal
+
+
+
+
+MULTI-DAY LOGIC RULE
+IF THE PRODUCT IS MULTI-DAY
+A product is considered multi-day if the cleaned source text contains phrases like:
+“Day 1”, “Day 2”, “5-day tour”, “multi-day”, “package”, “bundle”, “itinerary”, or clear references to multiple sequential days.
+THEN the Description section must include:
+1. A Multi-Day Overview Paragraph
+Before listing days, begin the Description with:
+a polished overview of the entire multi-day experience
+a summary of what is covered across the full itinerary
+a cohesive “journey flow” (start → highlights → finale)
+2. A Day-By-Day Itinerary Breakdown (inside Description section)
+After the overview paragraphs, include a structured itinerary:
+
+Format:
+### Itinerary
+
+**Day 1: [Title]**  
+[Short description of Day 1 activities]  
+⏰ [Times if provided]  
+✔ [Inclusions]  
+✖ [Exclusions]  
+
+**Day 2: [Title]**  
+[Short description]  
+⏰ …  
+✔ …  
+✖ …
+
+(repeat for however many days appear in source text)
+
+Rules:
+Do NOT invent content. Use only information from the source text.
+Keep each day concise, polished, and easy to scan.
+Times (if provided) must be formatted like: ⏰ 7:00 am – 6:00 pm
+Inclusions/exclusions must use ✔ and ✖
+Use markdown, not HTML
+3. A Closing Paragraph
+End the Description with a warm, encouraging sentence summarising the entire multi-day experience.
+IF THE PRODUCT IS SINGLE-DAY
+Follow the standard 3–4 paragraph Description format.
+B. Short Description Rules
+Craft a single sentence, under 18 words, following this framework:
+Emoji + 2–3 word intro + condensed attraction name + 4–8 word teaser
+Guidelines:
+● Clearly convey what it is and what you do
+● Keep it tight, appealing, and natural
+● Do NOT use emojis.
+● Output must be plain text wrapped in HTML tags only (e.g., <div>...</div>).
+Example:
+‘Cruise to Green Island on this half-day snorkel tour to discover vibrant coral and
+colourful tropical fish.’
+C. Highlights
+Provide 3–6 bullet points.
+Rules:
+Each bullet describes a clear feature or moment
+Use sentence case
+No full stops
+No sales language
+Keep each sentence short and to the point
+Bullet example format:
+Guided walk through ancient rainforest trails
+Scenic views from elevated lookouts
+Small-group experience with expert commentary
+D. Inclusions Rules
+List only what the source text explicitly mentions.
+ Allowed items:
+Equipment provided
+What travellers need to bring
+Safety notes
+Age limits
+Accessibility details
+Vehicle types / gear
+Necessary conditions or requirements
+Bullet points only.
+Do not assume or invent any inclusions.
+
+E. Additional Information 
+The Additional Information field MUST be populated.
+Include 1–3 concise, factual bullet points that help travellers understand access, setting, conditions, or context of the attraction.
+These points:
+May rephrase or summarise facts already mentioned elsewhere
+
+
+Must be derived directly from the source text
+
+
+Must add planning or contextual value
+
+
+Must NOT introduce new information
+
+
+Suitable content includes:
+Access method or pathway type
+
+
+Terrain or environment
+
+
+Wildlife presence
+
+
+Visit conditions or general suitability
+
+
+Conservation or natural setting context
+
+
+Rules:
+Bullet points only
+
+
+Do not copy full sentences from other fields
+
+
+Do not include dates, schedules, pricing, or availability
+
+
+Do not invent information
+
+
+This field must not be left empty
+5. OUTPUT FORMAT (STRICT)
+The final output must follow this exact format:
+### Description
+[content]
+
+### Short Description
+[content]
+
+### Highlights
+- point
+- point
+- point
+
+### Inclusions
+- point
+- point
+
+### Additional Information
+- point
+- point
+
+6. USER INPUT FIELD
+After this prompt template, the user will paste:
+SOURCE TEXT:
+(Insert the full imported attraction description here — may include HTML)
+
+OUTPUT FORMAT (STRICT)
+
+Return ONLY valid JSON with the following keys:
+- description (HTML string)
+- short_description (HTML string)
+- highlights (HTML string)
+- inclusions (HTML string)
+- additional_info (plain text, NOT HTML)
+
+Rules:
+- Do not include markdown
+- Do not include explanations
+- Do not include code fences
+- Do not include extra keys
+- HTML must use <p>, <ul>, <li>, <strong>, <em> only
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Previous Prompt:
+TRVLR.ai MASTER PROMPT (with HTML Handling + Updated Rules + Examples)
+Generate comprehensive content for the following product/service fields:
+Description, Short Description, Highlights, Inclusions, and Additional Information.
+All output must follow the rules below.
+ATTRACTION DETAILS
+Attraction Name:
+Supplier URL:
+TRVLR.ai IN-HOUSE STYLE RULES
+Use Australian English
+
+
+Do not mention the supplier name or contact details
+
+
+Do not include the location (city, country)
+
+
+Do not include references or citations
+
+
+Prioritise information from the Supplier URL (if provided or accessible in the text)
+
+
+Professional yet approachable, informative and genuine
+
+
+Lightly persuasive, but not salesy or over-hyped
+
+
+Avoid dashes “—”, use commas or full stops
+
+
+No hype words (e.g. “once-in-a-lifetime”, “unbelievable”)
+
+
+No pricing
+
+
+Only include restrictions, inclusions, or requirements if they appear in the source
+
+
+SEO-friendly based on the attraction name and supplier URL, but avoid keyword stuffing
+
+
+Keep sentences clean and concise
+HTML PROCESSING RULES
+The source text may contain HTML from booking systems.
+Before rewriting:
+Remove all HTML tags (<p>, <br>, <div>, <span>, <h1>, <ul>, <li> etc.)
+
+
+Convert structure into clean text:
+
+
+<p> → paragraph break
+
+
+<br> → line break
+
+
+<ul>/<ol> → list
+
+
+<li> → “-” bullet
+
+
+Remove attributes, scripts, embedded styles
+
+
+Decode HTML entities (&nbsp;, &amp;, etc.)
+
+
+Collapse repeated whitespace or blank lines
+
+
+Ignore hyperlinks
+
+
+After the HTML is cleaned and flattened into readable source text, rewrite using all style and structure rules below.
+
+STRUCTURE RULES
+1. Description (Main Description)
+
+The goal: Deliver a polished, SEO-friendly attraction description that inspires travellers, provides informative information, keep each paragraph short.
+Paragraph 1 — Overview / Hook
+
+
+Capture what makes the experience special
+
+
+Do not start with the location
+
+
+Paragraph 2 — What to expect and why would you want to do it?
+Describe what travellers will do
+What is included
+Focus on genuine appeal, nature, scenery, atmosphere, adventure, culture, or relaxation
+
+
+Paragraph 3 — Who It’s For
+Identify ideal traveller types, e.g.:
+
+
+Families
+
+
+Adventure seekers
+
+
+Couples
+
+
+Wildlife lovers
+
+
+Photographers
+
+
+Culture enthusiasts
+
+
+Section 4 — Closing Thought
+One warm, encouraging sentence reinforcing the experience’s appeal
+
+
+Short Description Rules
+Craft a single sentence, under 18 words, following this framework:
+Emoji + 2–3 word intro + condensed attraction name early + 4–8 word teaser
+Example:
+ ‘🪸 Cruise to Green Island on this half-day snorkel tour to discover vibrant coral and colourful tropical fish.’
+Guidelines:
+Start with an emoji
+
+
+Clearly convey what it is and what you do
+
+
+Keep it tight, appealing, and natural
+
+Highlights Rules
+Provide 3–6 bullet points:
+Each bullet describes a clear feature or moment
+
+
+Use sentence case
+
+
+No full stops
+
+
+No sales language
+Keep each sentence short and to the point
+
+
+Bullet example format:
+Guided walk through ancient rainforest trails
+
+
+Scenic views from elevated lookouts
+
+
+Small-group experience with expert commentary
+
+
+
+
+Inclusions Rules
+List only what the source text explicitly provides:
+Equipment provided
+
+
+What travellers need to bring
+
+
+Safety notes
+
+
+Age limits
+
+
+Accessibility details
+
+
+Vehicle types / gear
+
+
+Necessary conditions or requirements
+
+
+Bullet points only.
+Do not assume or invent any inclusions.
+Additional Information Rules
+Include only relevant leftover details that do not fit in the sections above.
+Bullet points or a short paragraph
+
+
+No invented content
+
+
+Keep it factual and concise
+New rule: “Dates & schedule handling”
+If the source includes any departure dates, season dates, availability dates, or tour schedule blocks (e.g. “2025 Departures”, “2026 Departures”, “Dates”, “Operating dates”), do not include them in Description.
+
+
+Put them under Additional Information as bullet points, grouped by year if available.
+For example:
+Match any line containing (case-insensitive):
+departures
+
+
+departure dates
+
+
+dates
+
+
+operating dates
+
+
+available on
+
+
+schedule
+
+
+season
+
+
+a standalone year line like 2025 / 2026
+
+
+Date-line patterns
+Capture bullet lines that look like:
+28 Nov
+
+
+5 Dec
+
+
+9 & 30 Jan
+
+
+6, 20 & 27 Mar
+
+
+10, 21 & 28 Apr
+
+
+Output formatting rule (clean)
+In Additional Information, emit:
+2025 departures: 28 Nov, 5 Dec
+
+
+2026 departures: 9 & 30 Jan, 11 Feb, 6, 20 & 27 Mar, ..c
+
+
+
+
+
+
+
+OUTPUT FORMAT (MUST BE EXACT)
+### Description
+[content]
+
+### Short Description
+[content]
+
+### Highlights
+- point
+- point
+- point
+
+### Inclusions
+- point
+- point
+
+### Additional Information
+- point
+- point
+
+USER INPUT FIELD
+After this prompt template, the user will paste:
+SOURCE TEXT:
+ (Insert the full imported attraction description here — may include HTML)
+
+OUTPUT FORMAT (STRICT)
+
+Return ONLY valid JSON with the following keys:
+- description (HTML string)
+- short_description (HTML string)
+- highlights (HTML string)
+- inclusions (HTML string)
+- additional_info (plain text, NOT HTML)
+
+Rules:
+- Do not include markdown
+- Do not include explanations
+- Do not include code fences
+- Do not include extra keys
+- HTML must use <p>, <ul>, <li>, <strong>, <em> only
+
